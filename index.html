@@ -142,13 +142,9 @@
       box-shadow: 0 1px 2px rgba(0,0,0,0.2);
     }
 
-    .xp-close-btn span {
-      color: white;
-      font-size: 16px;
-      font-weight: bold;
-      text-shadow: 1px 1px 1px rgba(0,0,0,0.4);
-      line-height: 22px;
-      text-align: center;
+    .xp-close-btn svg {
+      display: block;
+      filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.3));
     }
 
     .xp-content {
@@ -338,7 +334,10 @@
         <div class="xp-titlebar">
           <span class="xp-title" id="previewTitle">エラー・TakaNoriの体調</span>
           <div class="xp-close-btn">
-            <span>×</span>
+            <svg viewBox="0 0 10 10" width="10" height="10">
+              <line x1="2" y1="2" x2="8" y2="8" stroke="white" stroke-width="2" stroke-linecap="round"/>
+              <line x1="8" y1="2" x2="2" y2="8" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            </svg>
           </div>
         </div>
         <div class="xp-content">
