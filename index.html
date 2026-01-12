@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XPエラー画像ジェネレーター</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Hiragino Kaku Gothic ProN', 'メイリオ', sans-serif;
+      background: linear-gradient(135deg, #1e5799 0%, #3a7bd5 50%, #00d2ff 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      color: white;
+      text-align: center;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      font-size: 1.5rem;
+    }
+
+    .editor {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #333;
+      font-size: 0.9rem;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid #ddd;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-family: inherit;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #3a7bd5;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+
+    .buttons-editor {
+      display: flex;
+      gap: 10px;
+    }
+
+    .buttons-editor input {
+      flex: 1;
+    }
+
+    .preview-section {
+      text-align: center;
+    }
+
+    .preview-label {
+      color: white;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+    }
+
+    /* XP Dialog Styles */
+    .xp-dialog {
+      display: inline-block;
+      background: #ece9d8;
+      border: 3px solid #0055e5;
+      border-radius: 8px 8px 0 0;
+      box-shadow:
+        0 0 0 1px #001e96 inset,
+        4px 4px 15px rgba(0,0,0,0.4);
+      font-family: 'Tahoma', 'MS UI Gothic', 'メイリオ', sans-serif;
+      text-align: left;
+      min-width: 340px;
+      max-width: 500px;
+    }
+
+    .xp-titlebar {
+      background: linear-gradient(180deg,
+        #0a246a 0%,
+        #0f4bc9 8%,
+        #1665d8 40%,
+        #0f4bc9 88%,
+        #0a246a 93%,
+        #0a246a 95%,
+        #3a7bcd 100%
+      );
+      padding: 4px 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: 5px 5px 0 0;
+    }
+
+    .xp-title {
+      color: white;
+      font-size: 13px;
+      font-weight: bold;
+      text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+      padding-left: 2px;
+    }
+
+    .xp-close-btn {
+      width: 21px;
+      height: 21px;
+      background: linear-gradient(180deg, #e57e6e 0%, #cf432c 45%, #c02b16 50%, #d9664c 100%);
+      border: 1px solid #fff;
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+    }
+
+    .xp-close-btn span {
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
+      text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+      line-height: 1;
+      margin-top: -1px;
+    }
+
+    .xp-content {
+      padding: 15px 12px;
+    }
+
+    .xp-message-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .xp-icon {
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+    }
+
+    .xp-icon svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .xp-text {
+      flex: 1;
+      padding-top: 5px;
+    }
+
+    .xp-headline {
+      font-size: 13px;
+      font-weight: bold;
+      color: #000;
+      margin-bottom: 15px;
+    }
+
+    .xp-detail {
+      font-size: 12px;
+      color: #000;
+      line-height: 1.5;
+    }
+
+    .xp-button-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding-top: 10px;
+      border-top: 1px solid #fff;
+    }
+
+    .xp-button {
+      min-width: 85px;
+      padding: 4px 15px;
+      font-size: 12px;
+      font-family: inherit;
+      background: linear-gradient(180deg, #fff 0%, #ece9d8 89%, #ccc7b8 100%);
+      border: 1px solid #003c74;
+      border-radius: 3px;
+      color: #000;
+      cursor: pointer;
+      box-shadow:
+        0 0 0 1px #fff inset,
+        1px 1px 2px rgba(0,0,0,0.2);
+    }
+
+    .xp-button:first-child {
+      border: 2px dotted #000;
+      border-radius: 3px;
+      box-shadow:
+        0 0 0 1px #003c74,
+        2px 2px 3px rgba(0,0,0,0.15);
+    }
+
+    .save-hint {
+      color: white;
+      text-align: center;
+      margin-top: 15px;
+      font-size: 0.85rem;
+      background: rgba(0,0,0,0.2);
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .save-hint strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    /* Canvas for download */
+    #downloadCanvas {
+      display: none;
+    }
+
+    .download-btn {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      margin-top: 15px;
+      background: linear-gradient(180deg, #5cb85c 0%, #449d44 100%);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    }
+
+    .download-btn:active {
+      transform: scale(0.98);
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>XPエラー画像ジェネレーター</h1>
+
+    <div class="editor">
+      <div class="form-group">
+        <label>ウィンドウタイトル</label>
+        <input type="text" id="titleInput" value="エラー・TakaNoriの体調" oninput="updatePreview()">
+      </div>
+
+      <div class="form-group">
+        <label>見出しメッセージ</label>
+        <input type="text" id="headlineInput" value="TakaNoriの体調にエラーが発生しました" oninput="updatePreview()">
+      </div>
+
+      <div class="form-group">
+        <label>詳細メッセージ</label>
+        <textarea id="detailInput" oninput="updatePreview()">TakaNoriの体調に問題が発生しました。
+すぐに休憩が必要です。</textarea>
+      </div>
+
+      <div class="form-group">
+        <label>ボタン（空欄で非表示）</label>
+        <div class="buttons-editor">
+          <input type="text" id="btn1Input" value="再試行(R)" oninput="updatePreview()">
+          <input type="text" id="btn2Input" value="無視(I)" oninput="updatePreview()">
+          <input type="text" id="btn3Input" value="キャンセル" oninput="updatePreview()">
+        </div>
+      </div>
+
+      <button class="download-btn" onclick="downloadImage()">画像をダウンロード</button>
+    </div>
+
+    <div class="preview-section">
+      <p class="preview-label">▼ プレビュー（長押し/右クリックで保存も可能）</p>
+
+      <div class="xp-dialog" id="xpDialog">
+        <div class="xp-titlebar">
+          <span class="xp-title" id="previewTitle">エラー・TakaNoriの体調</span>
+          <div class="xp-close-btn">
+            <span>×</span>
+          </div>
+        </div>
+        <div class="xp-content">
+          <div class="xp-message-row">
+            <div class="xp-icon">
+              <svg viewBox="0 0 48 48">
+                <defs>
+                  <linearGradient id="iconGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#ff6b6b"/>
+                    <stop offset="100%" style="stop-color:#c0392b"/>
+                  </linearGradient>
+                </defs>
+                <circle cx="24" cy="24" r="22" fill="url(#iconGrad)" stroke="#8b0000" stroke-width="2"/>
+                <circle cx="24" cy="24" r="18" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+                <path d="M16 16 L32 32 M32 16 L16 32" stroke="white" stroke-width="5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="xp-text">
+              <div class="xp-headline" id="previewHeadline">TakaNoriの体調にエラーが発生しました</div>
+              <div class="xp-detail" id="previewDetail">TakaNoriの体調に問題が発生しました。<br>すぐに休憩が必要です。</div>
+            </div>
+          </div>
+          <div class="xp-button-row" id="previewButtons">
+            <button class="xp-button">再試行(R)</button>
+            <button class="xp-button">無視(I)</button>
+            <button class="xp-button">キャンセル</button>
+          </div>
+        </div>
+      </div>
+
+      <p class="save-hint">
+        <strong>保存方法</strong>
+        ダウンロードボタンを押すか、<br>
+        プレビューを長押し（スマホ）/ 右クリック（PC）で保存
+      </p>
+    </div>
+
+  </div>
+
+  <canvas id="downloadCanvas"></canvas>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <script>
+    function updatePreview() {
+      document.getElementById('previewTitle').textContent = document.getElementById('titleInput').value;
+      document.getElementById('previewHeadline').textContent = document.getElementById('headlineInput').value;
+
+      const detailText = document.getElementById('detailInput').value;
+      document.getElementById('previewDetail').innerHTML = detailText.replace(/\n/g, '<br>');
+
+      const btn1 = document.getElementById('btn1Input').value;
+      const btn2 = document.getElementById('btn2Input').value;
+      const btn3 = document.getElementById('btn3Input').value;
+
+      let buttonsHtml = '';
+      if (btn1) buttonsHtml += `<button class="xp-button">${escapeHtml(btn1)}</button>`;
+      if (btn2) buttonsHtml += `<button class="xp-button">${escapeHtml(btn2)}</button>`;
+      if (btn3) buttonsHtml += `<button class="xp-button">${escapeHtml(btn3)}</button>`;
+
+      document.getElementById('previewButtons').innerHTML = buttonsHtml;
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    async function downloadImage() {
+      const dialog = document.getElementById('xpDialog');
+
+      try {
+        const canvas = await html2canvas(dialog, {
+          backgroundColor: null,
+          scale: 2,
+          logging: false,
+          useCORS: true
+        });
+
+        // Create download link
+        const link = document.createElement('a');
+        link.download = 'xp-error-' + Date.now() + '.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      } catch (error) {
+        alert('画像の生成に失敗しました。もう一度お試しください。');
+        console.error(error);
+      }
+    }
+
+    // Initialize
+    updatePreview();
+  </script>
+
+</body>
+</html>
