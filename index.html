@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
@@ -90,81 +89,82 @@
       font-size: 0.9rem;
     }
 
-    /* XP Dialog Styles */
+    /* XP Dialog Styles - Updated to match XP more accurately */
     .xp-dialog {
       display: inline-block;
       background: #ece9d8;
-      border: 3px solid #0055e5;
-      border-radius: 8px 8px 0 0;
+      border: 1px solid #0055ea;
+      border-radius: 10px 10px 0 0;
       box-shadow:
-        0 0 0 1px #001e96 inset,
-        4px 4px 15px rgba(0,0,0,0.4);
+        0 0 0 1px rgba(0,0,0,0.1),
+        3px 3px 12px rgba(0,0,0,0.3);
       font-family: 'Tahoma', 'MS UI Gothic', 'メイリオ', sans-serif;
       text-align: left;
-      min-width: 340px;
-      max-width: 500px;
+      min-width: 380px;
+      max-width: 520px;
     }
 
     .xp-titlebar {
       background: linear-gradient(180deg,
-        #0a246a 0%,
-        #0f4bc9 8%,
-        #1665d8 40%,
-        #0f4bc9 88%,
-        #0a246a 93%,
-        #0a246a 95%,
-        #3a7bcd 100%
+        #0997ff 0%,
+        #0c7dea 10%,
+        #0863ce 40%,
+        #0654bf 60%,
+        #0654bf 80%,
+        #0863ce 90%,
+        #0a8cf5 100%
       );
-      padding: 4px 6px;
+      padding: 6px 8px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-radius: 5px 5px 0 0;
+      border-radius: 8px 8px 0 0;
     }
 
     .xp-title {
       color: white;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: bold;
-      text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
-      padding-left: 2px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+      padding-left: 4px;
+      letter-spacing: 0.5px;
     }
 
     .xp-close-btn {
-      width: 21px;
-      height: 21px;
-      background: linear-gradient(180deg, #e57e6e 0%, #cf432c 45%, #c02b16 50%, #d9664c 100%);
-      border: 1px solid #fff;
-      border-radius: 3px;
+      width: 22px;
+      height: 22px;
+      background: linear-gradient(180deg, #e88b7c 0%, #d45544 40%, #c73824 50%, #e07560 100%);
+      border: 1px solid rgba(255,255,255,0.6);
+      border-radius: 4px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.2);
     }
 
     .xp-close-btn span {
       color: white;
-      font-size: 14px;
+      font-size: 16px;
       font-weight: bold;
-      text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+      text-shadow: 1px 1px 1px rgba(0,0,0,0.4);
       line-height: 1;
-      margin-top: -1px;
+      margin-top: -2px;
     }
 
     .xp-content {
-      padding: 15px 12px;
+      padding: 20px 16px;
     }
 
     .xp-message-row {
       display: flex;
       align-items: flex-start;
-      gap: 15px;
-      margin-bottom: 20px;
+      gap: 18px;
+      margin-bottom: 24px;
     }
 
     .xp-icon {
-      width: 48px;
-      height: 48px;
+      width: 52px;
+      height: 52px;
       flex-shrink: 0;
     }
 
@@ -175,51 +175,49 @@
 
     .xp-text {
       flex: 1;
-      padding-top: 5px;
+      padding-top: 2px;
     }
 
     .xp-headline {
-      font-size: 13px;
+      font-size: 14px;
       font-weight: bold;
       color: #000;
-      margin-bottom: 15px;
+      margin-bottom: 16px;
+      line-height: 1.4;
     }
 
     .xp-detail {
-      font-size: 12px;
+      font-size: 13px;
       color: #000;
-      line-height: 1.5;
+      line-height: 1.6;
     }
 
     .xp-button-row {
       display: flex;
       justify-content: center;
-      gap: 10px;
-      padding-top: 10px;
-      border-top: 1px solid #fff;
+      gap: 12px;
+      padding-top: 16px;
+      border-top: 1px solid #d4d0c8;
     }
 
     .xp-button {
-      min-width: 85px;
-      padding: 4px 15px;
-      font-size: 12px;
-      font-family: inherit;
-      background: linear-gradient(180deg, #fff 0%, #ece9d8 89%, #ccc7b8 100%);
-      border: 1px solid #003c74;
-      border-radius: 3px;
+      min-width: 90px;
+      padding: 6px 20px;
+      font-size: 13px;
+      font-family: 'Tahoma', 'MS UI Gothic', 'メイリオ', sans-serif;
+      background: linear-gradient(180deg, #fff 0%, #f5f4f0 50%, #ece9d8 100%);
+      border: 1px solid #7a7a7a;
+      border-radius: 4px;
       color: #000;
       cursor: pointer;
       box-shadow:
-        0 0 0 1px #fff inset,
-        1px 1px 2px rgba(0,0,0,0.2);
+        inset 1px 1px 0 #fff,
+        inset -1px -1px 0 #c4c0b0;
     }
 
     .xp-button:first-child {
-      border: 2px dotted #000;
-      border-radius: 3px;
-      box-shadow:
-        0 0 0 1px #003c74,
-        2px 2px 3px rgba(0,0,0,0.15);
+      outline: 1px dotted #000;
+      outline-offset: -4px;
     }
 
     .save-hint {
@@ -237,16 +235,28 @@
       margin-bottom: 5px;
     }
 
-    /* Canvas for download */
-    #downloadCanvas {
-      display: none;
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .create-btn {
+      flex: 1;
+      padding: 15px;
+      background: linear-gradient(180deg, #5b9bd5 0%, #3a7bd5 100%);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
     }
 
     .download-btn {
-      display: block;
-      width: 100%;
+      flex: 1;
       padding: 15px;
-      margin-top: 15px;
       background: linear-gradient(180deg, #5cb85c 0%, #449d44 100%);
       color: white;
       border: none;
@@ -257,8 +267,30 @@
       box-shadow: 0 3px 10px rgba(0,0,0,0.2);
     }
 
-    .download-btn:active {
+    .create-btn:active, .download-btn:active {
       transform: scale(0.98);
+    }
+
+    /* Generated image preview */
+    .generated-preview {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .generated-preview img {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .generated-preview p {
+      color: white;
+      margin-top: 10px;
+      font-size: 0.85rem;
+    }
+
+    #generatedImage {
+      display: none;
     }
 
   </style>
@@ -293,11 +325,14 @@
         </div>
       </div>
 
-      <button class="download-btn" onclick="downloadImage()">画像をダウンロード</button>
+      <div class="btn-group">
+        <button class="create-btn" onclick="createImage()">画像作成</button>
+        <button class="download-btn" onclick="downloadImage()">ダウンロード</button>
+      </div>
     </div>
 
     <div class="preview-section">
-      <p class="preview-label">▼ プレビュー（長押し/右クリックで保存も可能）</p>
+      <p class="preview-label">▼ プレビュー</p>
 
       <div class="xp-dialog" id="xpDialog">
         <div class="xp-titlebar">
@@ -312,13 +347,17 @@
               <svg viewBox="0 0 48 48">
                 <defs>
                   <linearGradient id="iconGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" style="stop-color:#ff6b6b"/>
-                    <stop offset="100%" style="stop-color:#c0392b"/>
+                    <stop offset="0%" style="stop-color:#ff5f5f"/>
+                    <stop offset="50%" style="stop-color:#d62d2d"/>
+                    <stop offset="100%" style="stop-color:#b01818"/>
                   </linearGradient>
+                  <filter id="iconShadow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="1" dy="1" stdDeviation="1" flood-color="rgba(0,0,0,0.3)"/>
+                  </filter>
                 </defs>
-                <circle cx="24" cy="24" r="22" fill="url(#iconGrad)" stroke="#8b0000" stroke-width="2"/>
-                <circle cx="24" cy="24" r="18" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
-                <path d="M16 16 L32 32 M32 16 L16 32" stroke="white" stroke-width="5" stroke-linecap="round"/>
+                <circle cx="24" cy="24" r="21" fill="url(#iconGrad)" stroke="#800000" stroke-width="2" filter="url(#iconShadow)"/>
+                <circle cx="24" cy="24" r="17" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="2"/>
+                <path d="M15 15 L33 33 M33 15 L15 33" stroke="white" stroke-width="5" stroke-linecap="round"/>
               </svg>
             </div>
             <div class="xp-text">
@@ -334,16 +373,21 @@
         </div>
       </div>
 
+      <div class="generated-preview" id="generatedPreview" style="display: none;">
+        <p class="preview-label">▼ 生成された画像（長押し/右クリックで保存）</p>
+        <img id="generatedImage" alt="生成されたXPエラー画像">
+        <p>↑ この画像を長押し（スマホ）/ 右クリック（PC）で保存できます</p>
+      </div>
+
       <p class="save-hint">
-        <strong>保存方法</strong>
-        ダウンロードボタンを押すか、<br>
-        プレビューを長押し（スマホ）/ 右クリック（PC）で保存
+        <strong>使い方</strong>
+        1. 上のフォームでメッセージを編集<br>
+        2.「画像作成」ボタンで画像を生成<br>
+        3. 生成された画像を保存 or「ダウンロード」ボタン
       </p>
     </div>
 
   </div>
-
-  <canvas id="downloadCanvas"></canvas>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
@@ -373,6 +417,33 @@
       return div.innerHTML;
     }
 
+    async function createImage() {
+      const dialog = document.getElementById('xpDialog');
+
+      try {
+        const canvas = await html2canvas(dialog, {
+          backgroundColor: null,
+          scale: 2,
+          logging: false,
+          useCORS: true
+        });
+
+        const imgData = canvas.toDataURL('image/png');
+        const generatedImage = document.getElementById('generatedImage');
+        const generatedPreview = document.getElementById('generatedPreview');
+
+        generatedImage.src = imgData;
+        generatedImage.style.display = 'block';
+        generatedPreview.style.display = 'block';
+
+        // Scroll to the generated image
+        generatedPreview.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } catch (error) {
+        alert('画像の生成に失敗しました。もう一度お試しください。');
+        console.error(error);
+      }
+    }
+
     async function downloadImage() {
       const dialog = document.getElementById('xpDialog');
 
@@ -384,7 +455,6 @@
           useCORS: true
         });
 
-        // Create download link
         const link = document.createElement('a');
         link.download = 'xp-error-' + Date.now() + '.png';
         link.href = canvas.toDataURL('image/png');
